@@ -1,65 +1,69 @@
-package day1;
+package Day1;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class BusinessLogic {
 
-	public void borrowBook(String student, String book) {
-		BorrowBook bb = new BorrowBook(student, book);
+	public void borrowBook(int stuNo, int bookNo) throws SQLException {
+		BorrowBook bb = new BorrowBook(stuNo, bookNo);
 		boolean borrowable = false;
 
 		borrowable = bb.checkSuspention();
-		if (!borrowable) {
-			System.out.println("대출정지된 학생입니다.");
-			bb.borrowCancell();
-		}
-		borrowable = bb.checkUnreturnBook();
-		if (!borrowable) {
-			System.out.println("미반납도서 중 연체도서가 있습니다.");
-			bb.borrowCancell();
-		}
-		borrowable = bb.checkBrrowable();
-		if (!borrowable) {
-			System.out.println("도서대여는 5권까지 가능합니다.");
-			bb.borrowCancell();
-		}
-		borrowable = bb.checkHaveBook();
 		if (borrowable) {
-			System.out.println("도서대여가 완료되었습니다.");
-			bb.borrowConfirm();
+			bb.borrowCancell();
+			System.out.println("대출정지된 학생입니다.");
 		} else {
-			System.out.println("해당 도서는 모두 대여중 입니다. 예약하시겠습니까?  >> Y/N");
-			Scanner scan = new Scanner(System.in);
-			String choice = scan.nextLine();
-			scan.close();
-			
-			if (choice.equals("Y")) {
-				Boolean reservationable = false;
-				ReservationBook rb = new ReservationBook(student, book);
-				rb.checkReservationableStu();
-				if (!reservationable) {
-					System.out.println("도서예약은 3권까지 가능합니다.");
-					rb.reservationCancel();
-				}
-				rb.checkReservationableBook();
-				if (!reservationable) {
-					System.out.println("해당 도서의 예약인원은 2명까지 가능합니다.");
-					rb.reservationCancel();
-				}
-				if (reservationable) {
-					System.out.println("도서예약이 완료되었습니다.");
-					rb.reservationConfirm();
-				}
-
-			} else if (choice.equals("N")) {
-				System.out.println("도서 대여 및 예약이 취소되었습니다.");
+			borrowable = bb.checkUnreturnBook();
+			if (borrowable) {
 				bb.borrowCancell();
+				System.out.println("미반납도서 중 연체도서가 있습니다.");
+			} else {
+				borrowable = bb.checkBrrowable();
+				if (!borrowable) {
+					bb.borrowCancell();
+					System.out.println("도서대여는 5권까지 가능합니다.");
+				} else {
+					borrowable = bb.checkHaveBook();
+					if (borrowable) {
+						bb.borrowConfirm();
+						System.out.println("도서대여가 완료되었습니다.");
+					} else {
+						System.out.println("해당 도서는 모두 대여중 입니다. 예약하시겠습니까?  >> Y/N");
+						Scanner scan = new Scanner(System.in);
+						String choice = scan.nextLine();
+						scan.close();
+
+						if (choice.toUpperCase().equals("Y")) {
+							Boolean reservationable = false;
+							ReservationBook rb = new ReservationBook(stuNo, bookNo);
+							reservationable = rb.checkReservationableStu();
+							if (!reservationable) {
+								System.out.println("도서예약은 3권까지 가능합니다.");
+								rb.reservationCancell();
+							} else {
+								reservationable = rb.checkReservationableBook();
+								if (!reservationable) {
+									System.out.println("해당 도서의 예약인원은 2명까지 가능합니다.");
+									rb.reservationCancell();
+								} else {
+									if (reservationable) {
+										System.out.println("도서예약이 완료되었습니다.");
+										rb.reservationConfirm();
+									}
+								}
+							}
+						} else if (choice.equals("N")) {
+							System.out.println("도서 대여 및 예약이 취소되었습니다.");
+							bb.borrowCancell();
+						}
+					}
+				}
 			}
 		}
 	}
 	
-	
-	public void returnBook(int stdNo, int bookNo) {
+	public void returnBook(int stdNo, int bookNo) throws SQLException {
 		ReturnBook rb = new ReturnBook(stdNo, bookNo);
 		boolean unborrowable = rb.checkUnreturnBook();
 		boolean returnable = rb.checkHaveBook();
@@ -74,9 +78,11 @@ public class BusinessLogic {
 			if (unborrowable) {
 				System.out.println("대출정지일자가 갱신되었습니다.");
 				rb.updateSuspension();
+				rb.returnConfirm();
 			} else {
 				System.out.println("대출정지일자가 추가되었습니다.");
 				rb.newSuspension();
+				rb.returnConfirm();
 			}
 		}
 
