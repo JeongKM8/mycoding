@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>숫자 야구 게임에 오신 것을 환영합니다.</title>
+<script type="text/javascript" src="NumBaseball.js"></script>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    table.setting {
+        border: 1px solid;
+    }
+
+    table.select {
+        text-align: center;
+    }
+
+    article {
+        float: left;
+        padding: 20px;
+        width: 50%;
+        background-color: #ffffff;
+    }
+
+    aside::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+</head>
+<body>
+<header>
+<h1>숫자야구 게임에 오신 것을 환영합니다.</h1>
+</header>
+<table class="setting">
+    <tr><td>난이도</td><td><input type="radio" name="difficulty">상<input type="radio" name="difficulty">중<input type="radio" name="difficulty">하</td><td><input type=button value="시작" onclick="startGame()"></td></tr>
+</table>
+<article>
+<table class="try">
+    <tr><td>정답</td><td><input type="text" id="AFirst" placeholder="?" readonly="readonly" size="1"></td><td><input type="text" id="ASecond" placeholder="?" readonly="readonly" size="1"></td><td><input type="text" id="AThird" placeholder="?" readonly="readonly" size="1"></td><td><input type="text" id="AFourth" placeholder="?" readonly="readonly" size="1"></td></tr>
+    <tr><td>시도</td><td><input type="text" id="iFirst" size="1"></td><td><input type="text" id="iSecond" size="1" readonly="readonly"></td><td><input type="text" id="iThird" size="1" readonly="readonly"></td><td><input type="text" id="iFourth" size="1" readonly="readonly"></td></tr>
+</table>
+<table>
+    <tr><td>결과</td><td id="Strike"></td><td>S</td><td id="Ball"></td><td>B</td></tr>
+</table>
+<table class="select">
+    <tr><td><input type="button" id="zero" value="0" onclick="input0()"></td><td><input type="button" id="one" value="1" onclick="input1()"></td><td><input type="button" id="two" value="2" onclick="input2()"></td><td><input type="button" id="three" value="3" onclick="input3()"></td><td><input type="button" id="four" value="4" onclick="input4()"></td><td><input type="button" id="five" value="5" onclick="input5()"></td><td><input type="button" id="six" value="6" onclick="input6()"></td><td><input type="button" id="seven" value="7" onclick="input7()"></td><td><input type="button" id="eight" value="8" onclick="input8()"></td><td><input type="button" id="nine" value="9" onclick="input9()"></td></tr>
+    <tr><td><input type="checkbox" id="check0"></td><td><input type="checkbox" id="check1"></td><td><input type="checkbox" id="check2"></td><td><input type="checkbox" id="check3"></td><td><input type="checkbox" id="check4"></td><td><input type="checkbox" id="check5"></td><td><input type="checkbox" id="check6"></td><td><input type="checkbox" id="check7"></td><td><input type="checkbox" id="check8"></td><td><input type="checkbox" id="check9"></td></tr>
+</table>
+<button onclick="endGame()">종료</button>
+<button onclick="submit()">제출</button>
+<button onclick="answerCheck()">정답확인</button>
+</article>
+<aside>
+    <h4>try list</h4>
+    <table>
+        <p id="demo"></p>
+        <p id="demo"></p>
+    </table>
+</aside>
+</body>
+</html>
