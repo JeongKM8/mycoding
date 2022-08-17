@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width" initial-scale=0.91 maximum-scale=0.91 user-scalable=0 target-densityDpi="device-dpi" />
+    <title>달력 복습</title>
+    <script src = "../js/cal.js">  
+    </script>
+    <style>
+        table, tr, td, th {
+            border: 1px solid black;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 50px;
+        }
+
+        #calendar {
+            display: flex;
+            justify-content:center;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        .sun {
+            color: red;
+        }
+
+        .sat {
+            color: blue;
+        }
+    </style>  
+</head>
+<body>
+    <h1>Welcome! VS code</h1>
+    <h2>javascript practice!</h2>
+    <form>
+        <input type="text" id="month" placeholder="원하는 월을 입력하시오">
+        <input type="button" value="달력 실행" onclick="make_calendar()">
+        <select id="combo" onchange="select_month()">
+            <option>---월 선택---</option>
+            <option value="1">1월</option>
+            <option value="2">2월</option>
+            <option value="3">3월</option>
+            <option value="4">4월</option>
+            <option value="5">5월</option>
+            <option value="6">6월</option>
+            <option value="7">7월</option>
+            <option value="8">8월</option>
+            <option value="9">9월</option>
+            <option value="10">10월</option>
+            <option value="11">11월</option>
+            <option value="12">12월</option>
+        </select>
+    </form>
+    <div id="calendar">
+      <!--
+            <tr><th colspan="7">8월 달력</th></tr>
+            <tr><th class="sun">일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th class="sat">토</th></tr>
+            <tr><td class="sun"></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td class="sat">6</td></tr>
+            <tr><td class="sun">7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td class="sat">13</td></tr>
+            <tr><td class="sun">14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td class="sat">20</td></tr>
+            <tr><td class="sun">21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td class="sat">27</td></tr>
+            <tr><td class="sun">28</td><td>29</td><td>30</td><td>31</td></tr>
+        </table> --> 
+    </div>
+</body>
+</html>
